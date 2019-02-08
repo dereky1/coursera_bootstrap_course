@@ -31,7 +31,7 @@
                 <li class="navbar-item"><a class="nav-link" href="contactus.html"><i class="fa fa-address-card fa-lg"></i>Contact</a></li>
               </ul>
               <span class="navbar-text">
-                <a data-toggle="modal" data-target="#loginModal">
+                <a id="loginButton">
                   <span class="fa fa-sign-in"></span>Login</a>
               </span>
             </div>
@@ -84,7 +84,7 @@
                   <img src="img/logo.png" class="img-fluid">
                 </div>
                 <div class="col-12 col-sm-3 align-self-center">
-                    <a role="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#reserveModal">Reserve Table
+                    <a role="button" class="btn btn-warning btn-block" id="reserveButton">Reserve Table
                     </a>
                 </div>
             </div>
@@ -201,11 +201,8 @@
               <span class="carousel-control-next-icon"></span>
             </a>
             <div class="btn-group" id="caroselButton">
-              <button class="btn btn-danger btn-sm" id="carousel-pause">
-                <span class="fa fa-pause"></span>
-              </button>
-              <button class="btn btn-danger btn-sm" id="carousel-play">
-                <span class="fa fa-play"></span>
+              <button class="btn btn-danger btn-sm" id="carouselButton">
+                <span id="carousel-button-icon" class="fa fa-pause"></span>
               </button>
             </div>
           </div>
@@ -262,7 +259,7 @@
                 </div>
             </div>
         </div>
-
+      </div>
 <!--
         <div class="row align-items-center" id="reservation">
           <div class="col-12 col-sm-8 offset-sm-2">
@@ -350,7 +347,7 @@
                     </div>
                 </div>
            </div>
-           <div class="row justif-content-center">
+           <div class="row justify-content-center">
                 <div class="col-auto">
                     <p>© Copyright 2018 Ristorante Con Fusion</p>
                 </div>
@@ -367,16 +364,30 @@
       });
     </script> THIS IS FOR TOOLTIPS (no longer in use) -->
 
-
     <script>
       $(document).ready(function(){
         $('#mycarousel').carousel({interval:2000});
-        $('#carousel-pause').click(function(){
-          $('#mycarousel').carousel('pause');
+        $('#carouselButton').click(function(){
+          if($('#carouselButton').children('span').hasClass('fa-pause')){
+            $('#mycarousel').carousel('pause');
+            $('#carouselButton').children('span').removeClass('fa-pause');
+            $('#carouselButton').children('span').addClass('fa-play');
+          }
+          else if($('#carouselButton').children('span').hasClass('fa-play')){
+            $('#mycarousel').carousel('cycle');
+            $('#carouselButton').children('span').removeClass('fa-play');
+            $('#carouselButton').children('span').addClass('fa-pause');
+          }
         });
-        $('#carousel-play').click(function(){
-          $('#mycarousel').carousel('cycle');
+
+        $('#reserveButton').click(function(){
+          $('#reserveModal').modal('toggle');
         });
+
+        $('#loginButton').click(function(){
+          $('#loginModal').modal('toggle');
+        });
+
       })
     </script>
 
